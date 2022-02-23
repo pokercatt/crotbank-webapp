@@ -4,15 +4,29 @@
   box-sizing: inherit;
 }
 
+:root {
+  --bg-color: #2e2e2e;
+  --button-primary-color: #1f1f1f;
+  --text-color: #bbb;
+  --placeholder-color: rgb(116, 116, 116);
+}
+
+.light-mode {
+  --bg-color: #f3f3f3;
+  --button-primary-color: #fff;
+  --text-color: rgb(92, 92, 92);
+  --placeholder-color: #bbb;
+}
+
 html {
   font-size: 62.5%;
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
-  color: #444;
-  background-color: #f3f3f3;
+  font-family: "Poppins", sans-serif;
+  color: var(--text-color);
+  background-color: var(--bg-color);
   height: 100vh;
   padding: 2rem;
 }
@@ -22,6 +36,53 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
+}
+
+.mode__toggler {
+  display: flex;
+  align-items: center;
+}
+
+.mode__toggler span:not(:last-child),
+.mode__toggler input {
+  margin-right: 15px;
+}
+
+.toggler__sign {
+  font-size: 15px;
+}
+
+.toggle-button {
+  -webkit-appearance: none;
+  outline: 1px solid var(--placeholder-color);
+  width: 50px;
+  height: 25px;
+  background-color: #212121;
+  border-radius: 50px;
+  position: relative;
+  transition: 0.4s;
+}
+
+.toggle-button:before {
+  content: "";
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  border-radius: 50px;
+  top: 0;
+  bottom: 0;
+  background-color: #bdbdbd;
+  transition: 0.4s;
+}
+
+.toggle-button:checked {
+  background-color: #ffffff;
+}
+
+.toggle-button:checked:before {
+  transform: translate(100%);
+  background-color: rgb(95, 95, 95);
+  transition: 0.4s;
 }
 
 .welcome {
@@ -38,7 +99,6 @@ nav {
 }
 
 .login__input {
-  border: none;
   padding: 0.5rem 2rem;
   font-size: 1.6rem;
   font-family: inherit;
@@ -47,7 +107,8 @@ nav {
   border-radius: 10rem;
   margin-right: 1rem;
   color: inherit;
-  border: 1px solid #fff;
+  border: 1px solid var(--button-primary-color);
+  background-color: var(--button-primary-color);
   transition: all 0.3s;
 }
 
@@ -57,7 +118,7 @@ nav {
 }
 
 .login__input::placeholder {
-  color: #bbb;
+  color: var(--placeholder-color);
 }
 
 .login__btn {
@@ -157,6 +218,7 @@ nav {
 }
 
 .movements__value {
+  color: #2e2e2e;
   font-size: 1.7rem;
   margin-left: auto;
 }
@@ -192,6 +254,7 @@ nav {
 }
 
 .btn--sort {
+  color: var(--text-color);
   margin-left: auto;
   border: none;
   background: none;

@@ -11,6 +11,7 @@ export const labelTimer = document.querySelector('.timer');
 export const containerApp = document.querySelector('.app');
 export const containerMovements = document.querySelector('.movements');
 
+export const modeToggler = document.querySelector('.mode__toggler');
 export const btnLogin = document.querySelector('.login__btn');
 export const btnTransfer = document.querySelector('.form__btn--transfer');
 export const btnLoan = document.querySelector('.form__btn--loan');

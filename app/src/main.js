@@ -275,3 +275,7 @@ dom.btnSort.addEventListener("click", function (e) {
   displayMovements(currentAccount, !sorted);
   sorted = !sorted;
 });
+
+dom.modeToggler.addEventListener("change", () => {
+  document.body.classList.toggle("light-mode");
+});
