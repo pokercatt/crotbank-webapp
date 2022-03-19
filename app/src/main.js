@@ -4,25 +4,16 @@ import accounts from "./userData.js";
 import * as dom from "./domElements.js";
 import {
   calcBalance,
-  calcDaysPassed,
   calcIncomes,
   calcInterest,
   calcSpending,
   createUsernames,
   formatCur,
+  formatMovementDate,
 } from "./utilities.js";
 
 /////////////////////////////////////////////////
 // Functions
-
-const formatMovementDate = function (date, locale) {
-  const daysPassed = calcDaysPassed(new Date(), date);
-
-  if (daysPassed === 0) return "Today";
-  if (daysPassed === 1) return "Yesterday";
-  if (daysPassed <= 7) return `${daysPassed} days ago`;
-  return new Intl.DateTimeFormat(locale).format(date);
-};
 
 const displayMovements = function (acc, sort = false) {
   dom.containerMovements.innerHTML = "";
@@ -106,6 +97,7 @@ const startLogOutTimer = function () {
     if (time === 0) {
       clearInterval(timer);
       dom.labelWelcome.textContent = "Log in to get started";
+      dom.headingCaption.style.opacity = 100;
       dom.containerApp.style.opacity = 0;
     }
 
@@ -139,13 +131,14 @@ dom.btnLogin.addEventListener("click", function (e) {
   currentAccount = accounts.find(
     (acc) => acc.username === dom.inputLoginUsername.value
   );
-  console.log(currentAccount);
 
   if (currentAccount?.pin === +dom.inputLoginPin.value) {
     // Display UI and message
     dom.labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(" ")[0]
     }`;
+    dom.errorWarning.style.opacity = 0;
+    dom.headingCaption.style.opacity = 0;
     dom.containerApp.style.opacity = 100;
 
     // Create current date and time
@@ -156,22 +149,12 @@ dom.btnLogin.addEventListener("click", function (e) {
       day: "numeric",
       month: "numeric",
       year: "numeric",
-      // weekday: 'long',
     };
-    // const locale = navigator.language;
-    // console.log(locale);
 
     dom.labelDate.textContent = new Intl.DateTimeFormat(
       currentAccount.locale,
       options
     ).format(now);
-
-    // const day = `${now.getDate()}`.padStart(2, 0);
-    // const month = `${now.getMonth() + 1}`.padStart(2, 0);
-    // const year = now.getFullYear();
-    // const hour = `${now.getHours()}`.padStart(2, 0);
-    // const min = `${now.getMinutes()}`.padStart(2, 0);
-    // labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
 
     // Clear input fields
     dom.inputLoginUsername.value = dom.inputLoginPin.value = "";
@@ -183,7 +166,7 @@ dom.btnLogin.addEventListener("click", function (e) {
 
     // Update UI
     updateUI(currentAccount);
-  }
+  } else dom.errorWarning.style.opacity = 100;
 });
 
 dom.btnTransfer.addEventListener("click", function (e) {
@@ -262,6 +245,8 @@ dom.btnClose.addEventListener("click", function (e) {
 
     // Hide UI
     dom.containerApp.style.opacity = 0;
+    dom.labelWelcome.textContent = "Log in to get started";
+    dom.headingCaption.style.opacity = 100;
   }
 
   dom.inputCloseUsername.value = dom.inputClosePin.value = "";
