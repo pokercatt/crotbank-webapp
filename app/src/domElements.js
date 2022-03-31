@@ -14,6 +14,7 @@ export const containerMovements = document.querySelector(".movements");
 export const errorWarning = document.querySelector(".error-warning");
 
 export const modeToggler = document.querySelector(".mode__toggler");
+export const headingIcon = document.querySelector(".heading-icon");
 export const btnLogin = document.querySelector(".login__btn");
 export const btnTransfer = document.querySelector(".form__btn--transfer");
 export const btnLoan = document.querySelector(".form__btn--loan");

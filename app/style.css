@@ -386,3 +386,9 @@ h2 {
   margin-top: 1em;
   opacity: 0;
 }
+
+.heading-icon {
+  position: relative;
+  top: 6em;
+  max-width: 50em;
+}

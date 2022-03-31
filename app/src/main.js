@@ -263,4 +263,8 @@ dom.btnSort.addEventListener("click", function (e) {
 
 dom.modeToggler.addEventListener("change", () => {
   document.body.classList.toggle("light-mode");
+  if (dom.headingIcon.src.endsWith("mole-dark.png"))
+    dom.headingIcon.src = "mole-light.png";
+  else if (dom.headingIcon.src.endsWith("mole-light.png"))
+    dom.headingIcon.src = "mole-dark.png";
 });
