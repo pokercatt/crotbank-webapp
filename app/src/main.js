@@ -139,7 +139,9 @@ dom.btnLogin.addEventListener("click", function (e) {
     }`;
     dom.errorWarning.style.opacity = 0;
     dom.headingCaption.style.opacity = 0;
-    dom.containerApp.style.opacity = 100;
+    dom.headingIcon.classList.add("hidden");
+    dom.containerApp.classList.remove("hidden");
+    setTimeout(() => (dom.containerApp.style.opacity = 100), 100);
 
     // Create current date and time
     const now = new Date();
@@ -245,8 +247,12 @@ dom.btnClose.addEventListener("click", function (e) {
 
     // Hide UI
     dom.containerApp.style.opacity = 0;
-    dom.labelWelcome.textContent = "Log in to get started";
-    dom.headingCaption.style.opacity = 100;
+    setTimeout(() => {
+      dom.containerApp.classList.add("hidden");
+      dom.labelWelcome.textContent = "Log in to get started";
+      dom.headingIcon.classList.remove("hidden");
+      dom.headingCaption.style.opacity = 100;
+    }, 1000);
   }
 
   dom.inputCloseUsername.value = dom.inputClosePin.value = "";
